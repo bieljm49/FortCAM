@@ -1,0 +1,234 @@
+
+/* Reset básico */
+
+img {
+  padding: 5px;
+  width: 200px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+nav ul li a {
+  color: whitesmoke;
+  background-color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.3s;
+}
+nav ul li a:hover {
+  color: rgb(122, 120, 120);
+  transform: translateY(-2px);
+}
+
+
+h1, h2, h3, h4 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+.card {
+  background: #f0f4f8;
+  border-left: 5px solid #2575fc;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+footer {
+  
+  background: whitesmoke;
+  font-weight: bold;
+  color: #fff;
+  padding: 1.5rem 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+      text-align: center;
+      color: #263032;
+    }
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+nav a {
+position: relative;
+font-family: 'Montserrat', sans-serif;
+font-size: 15px;
+color: white;
+text-decoration: none;
+padding: 10px 15px;
+transition: all 0.3s ease-in-out;
+}
+
+nav a::before {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+height: 70%;
+background: rgba(255, 255, 255, 0.212); /* Fundo bonito só no texto */
+border-radius: 5px;
+z-index: -1;
+transition: height 0.3s ease-in-out;
+}
+
+nav a:hover::before {
+height: 100%;
+}
+
+nav a:hover {
+text-shadow: 2px 2px 5px rgba(219, 211, 211, 0.5); /* Sombra ao passar o mouse */
+}
+
+.nav-link.active {
+  background-color: white;
+  color: #2c2f35;
+  border: 2px solid #2f3a52; /* Borda branca, por exemplo */
+}
+
+
+
+/* Reset e estilos básicos */
+   
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #263032;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+header {
+  background: whitesmoke;
+  
+  color: #fff;
+  padding: 1.5rem 0;
+  text-align: center;
+  position: static;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+    header h1 {
+      text-align: center;
+      color: #263032;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,0.4);
+    }
+    /* Conteúdo principal */
+    .container {
+      max-width: 650px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgb(255, 255, 255);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    } 
+
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+
+    /* Estilos dos formulários */
+    form {
+      margin: 20px 0;
+    }
+    form .form-group {
+      margin-bottom: 15px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: black;
+      
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    form button {
+      font-family: 'Montserrat', sans-serif;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      justify-content: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-align: center;
+      
+    }
+    form button:hover {
+      background: #357ab8;
+    }
+    /* Tabelas e listas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    table th {
+      background: #f4f4f4;
+    }
+    /* Cards de produtos na página de configurações */
+    .card {
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
