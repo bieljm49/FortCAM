@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relatório PDF</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 40px;
+      color: #000;
+    }
+    h1, h2 {
+      margin-top: 30px;
+    }
+    .critico {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body id="pdfContent">
+  <h1>Relatório de Ocorrência</h1>
+  <p><strong>Cliente:</strong> <span id="local"></span></p>
+  <p><strong>Data da Análise:</strong> <span id="data"></span></p>
+
+  <h2>Diagnóstico</h2>
+  <p>Fomos contratados para realizar uma análise técnica detalhada, aplicando soluções avançadas em segurança e monitoramento.</p>
+
+  <h2>Descrição da Ocorrência</h2>
+  <p id="descricao"></p>
+
+  <p id="critico" class="critico" style="display:none;">⚠ Ocorrência considerada crítica</p>
+
+  <h2>Observações</h2>
+  <p id="observacao"></p>
+
+  <hr style="margin: 30px 0;">
+
+  <p><strong>Fiscal:</strong> <span id="fiscal"></span></p>
+  <p><strong>Analista:</strong> <span id="analista"></span></p>
+
+  <script>
+
+  window.addEventListener("message", (event) => {
+    const rel = event.data;
+
+    document.getElementById("local").textContent = rel.local;
+    document.getElementById("data").textContent = new Date(rel.dataEvento).toLocaleDateString("pt-BR");
+    document.getElementById("descricao").innerHTML = rel.descricao.replace(/\n/g, "<br>");
+    document.getElementById("observacao").innerHTML = (rel.observacao || "Sem observações").replace(/\n/g, "<br>");
+    document.getElementById("fiscal").textContent = rel.fiscal;
+    document.getElementById("analista").textContent = rel.analista;
+
+    if (rel.criticidade === "Sim") {
+      document.getElementById("critico").style.display = "block";
+    }
+
+    // Aguarda o render e gera PDF
+    setTimeout(() => {
+      html2pdf().set({
+        filename: `Relatorio_${rel.id}.pdf`,
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      }).from(document.getElementById("pdfContent"))
+      .save()
+      .then(() => {
+        window.close();  // Fecha a aba após salvar o PDF
+      });
+    }, 500);
+  }, false);
+</script>
+
+</body>
+</html>

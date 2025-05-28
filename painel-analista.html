@@ -1,0 +1,90 @@
+<!-- index.html adaptado para controle de relatórios de vídeo - Apenas para analistas -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<script>
+  const tipo = localStorage.getItem("tipoUsuario");
+  if (tipo !== "analista") {
+    alert("Acesso não autorizado!");
+    location.href = "index.html";
+  }
+</script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controle de Relatórios | FORTCAM</title>
+  <link rel="icon" href="logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="Style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav style="position: absolute; top: 10px; right: 10px;">
+    <ul style="list-style: none; margin: 0; padding: 0;">
+    <li><a onclick="logout()">Logout</a></li>
+    </ul>
+    </nav>
+    
+    <img src="logo.png" alt="Logo"/>
+    <h1>Controle de Relatórios | FORTCAM</h1>
+    <nav>
+      <ul>
+        <li><a href="" class="nav-link active" data-section="novoRelatorio">Preenchimento de Relatório</a></li>
+        <li><a href="painel-fiscal.html" data-section="novoRelatorio">Painel Fiscal</a></li>
+        <li><a href="dashboard.html"  data-section="novoRelatorio">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Formulário de relatório -->
+    <section id="novoRelatorio" class="section active">
+      <h2>Novo Relatório</h2>
+      <form id="formRelatorio">
+        <div class="form-group">
+          <label for="analista">Seu nome (Analista):</label>
+          
+          <input style="background-color: gray; color: whitesmoke;font-weight: bold;" type="text" id="analista" name="analista" required readonly>
+        </div>
+        <div class="form-group">
+          <label for="dataEvento">Data e Hora do Evento:</label>
+          <input type="datetime-local" id="dataEvento" name="dataEvento" required>
+        </div>
+        <div class="form-group">
+          <label for="local">Local (Condomínio Cliente):</label>
+          <input type="text" id="local" name="local" required>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição da ocorrência:</label>
+          <textarea id="descricao" name="descricao" rows="10" required placeholder="Descreva aqui os eventos observados."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="observacao">Observação:</label>
+          <textarea id="observacao" name="observacao"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="criticidade">Ocorreu algo grave?</label>
+          <select id="criticidade" name="criticidade" required>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="linkVideo">Link do Vídeo:</label>
+          <input type="url" id="linkVideo" name="linkVideo" placeholder="Cole aqui o link do Google Drive, YouTube etc" required>
+        </div>
+        <button type="submit">Concluir Relatório</button>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <p style="text-align: center">&copy; 2025 Sistema de Monitoramento. Todos os direitos reservados.</p>
+   <p style="text-align: center">&spades; v28052025 - TARDE</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="Auth.js"></script>
+</body>
+</html>

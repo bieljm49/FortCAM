@@ -7,12 +7,15 @@
   <link rel="icon" href="logo.png" type="image/x-icon">
   <link rel="stylesheet" href="Style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <script>
-    const fiscal = localStorage.getItem("fiscalLogado");
-    if (!fiscal) {
-        location.href = "login.html";
-    }
-    </script>
+  const tipo = localStorage.getItem("tipoUsuario");
+  if (tipo !== "fiscal") {
+    alert("Acesso não autorizado!");
+    location.href = "index.html";
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 
 </head>
@@ -21,17 +24,18 @@
   <header>
     <nav style="position: absolute; top: 10px; right: 10px;">
     <ul style="list-style: none; margin: 0; padding: 0;">
-    <li><a onclick="logout()">Deslogar</a></li>
-        
+    <li><a onclick="logout()">Logout</a></li>
     </ul>
     </nav>
+        
 
     <img src="logo.png" alt="Logo"/>
-    <h1>Controle de Relatórios | FORTCAM</h1>
+    <h1>Acompanhamento de Relatórios | FORTCAM</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Preenchimento de Relatório</a></li>
-        <li><a href="#" class="nav-link active" data-section="relatoriosContainer">Painel Supervisão</a></li>
+        <li><a href="painel-analista.html"  data-section="novoRelatorio">Preenchimento de Relatório</a></li>
+        <li><a href="painel-fiscal.html" class="nav-link active" data-section="novoRelatorio">Painel Fiscal</a></li>
+        <li><a href="dashboard.html"  data-section="novoRelatorio">Dashboard</a></li>
       </ul>
     </nav>
   </header>
@@ -80,8 +84,11 @@
     <p style="text-align: center">&copy; 2025 Sistema de Monitoramento. Todos os direitos reservados.</p>
     <p style="text-align: center">&spades; v27052025 - NOITE</p>
   </footer>
+  
+  
+  <iframe id="printFrame" style="display: none;"></iframe>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
   <script src="script.js"></script>
   <script src="Auth.js"></script>
 </body>

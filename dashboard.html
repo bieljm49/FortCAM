@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Relatórios</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="Style.css">
+
+  <script>
+  const tipo = localStorage.getItem("tipoUsuario");
+  if (tipo !== "gestao") {
+    alert("Acesso não autorizado!");
+    location.href = "index.html";
+  }
+</script>
+
+
+  <style>
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: whitesmoke;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card-dashboard {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      min-width: 150px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card-dashboard h2 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .chart-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+    <header>
+    <nav style="position: absolute; top: 10px; right: 10px;">
+    <ul style="list-style: none; margin: 0; padding: 0;">
+    <li><a onclick="logout()">Logout</a></li>
+    </ul>
+    </nav>
+
+    <img src="logo.png" alt="Logo"/>
+      <h1>Dashboard de Relatórios | FORTCAM</h1>
+
+      <nav>
+      <ul>
+        <li><a href="painel-analista.html" data-section="novoRelatorio">Preenchimento de Relatório</a></li>
+        <li><a href="painel-fiscal.html" data-section="novoRelatorio">Painel Fiscal</a></li>
+        <li><a href="dashboard.html" class="nav-link active" data-section="novoRelatorio">Dashboard</a></li>
+      </ul>
+    </nav>
+      
+    </nav>
+  </header>
+
+  <br>
+    
+  <div class="cards">
+    <div class="card-dashboard">
+      <h2 id="totalCount">-</h2>
+      <p style="text-align: center;"><strong>Total</strong></p>
+    </div>
+    <div class="card-dashboard">
+      <h2 id="pendenteCount">-</h2>
+      <p style="text-align: center;"><strong>Pendentes</strong></p>
+    </div>
+    <div class="card-dashboard">
+      <h2 id="aprovadoCount">-</h2>
+      <p style="text-align: center;"><strong>Aprovados</strong></p>
+    </div>
+    <div class="card-dashboard">
+      <h2 id="reprovadoCount">-</h2>
+      <p style="text-align: center;"><strong>Reprovados</strong></p>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="statusChart"></canvas>
+  </div>
+
+   <script src="Auth.js"></script>
+  <script>
+    
+    const googleScriptURL = "https://script.google.com/macros/s/AKfycbxx8qFuuvkYdqEm6joO_0-boWzIW_BGXP6vjKyDiFxvBV_nIZToG1cwmeHXB17sjqv6/exec";
+
+    fetch(googleScriptURL + "?acao=listar")
+      .then(res => res.json())
+      .then(data => {
+        const total = data.length;
+        const pendentes = data.filter(r => r.status === "Pendente").length;
+        const aprovados = data.filter(r => r.status === "Aprovado").length;
+        const reprovados = data.filter(r => r.status === "Reprovado").length;
+
+        document.getElementById("totalCount").innerText = total;
+        document.getElementById("pendenteCount").innerText = pendentes;
+        document.getElementById("aprovadoCount").innerText = aprovados;
+        document.getElementById("reprovadoCount").innerText = reprovados;
+
+        const ctx = document.getElementById('statusChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Pendente', 'Aprovado', 'Reprovado'],
+            datasets: [{
+              label: 'Relatórios por status',
+              data: [pendentes, aprovados, reprovados],
+              backgroundColor: ['#f4b400', '#34a853', '#ea4335']
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              title: { display: true, text: 'Distribuição de Relatórios por Status' }
+            }
+          }
+        });
+      })
+      .catch(err => {
+        alert("Erro ao carregar dados do dashboard.");
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
