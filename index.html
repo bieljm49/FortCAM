@@ -1,78 +1,84 @@
-<!-- index.html adaptado para controle de relatórios de vídeo - Apenas para analistas -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controle de Relatórios | FORTCAM</title>
+  <title>Login Fiscal | FORTCAM</title>
   <link rel="icon" href="logo.png" type="image/x-icon">
   <link rel="stylesheet" href="Style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
-    <nav style="position: absolute; top: 10px; right: 10px;">
-    <ul style="list-style: none; margin: 0; padding: 0;">
-    <li><a href="login.html">Login Fiscal</a></li>
+    
+    
     </ul>
     </nav>
     
     <img src="logo.png" alt="Logo"/>
-    <h1>Controle de Relatórios | FORTCAM</h1>
-    <nav>
-      <ul>
-        <li><a href="#" class="nav-link active" data-section="novoRelatorio">Preenchimento de Relatório</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <div class="container">
-    <!-- Formulário de relatório -->
-    <section id="novoRelatorio" class="section active">
-      <h2>Novo Relatório</h2>
-      <form id="formRelatorio">
-        <div class="form-group">
-          <label for="analista">Seu nome (Analista):</label>
-          <input type="text" id="analista" name="analista" required>
-        </div>
-        <div class="form-group">
-          <label for="dataEvento">Data e Hora do Evento:</label>
-          <input type="datetime-local" id="dataEvento" name="dataEvento" required>
-        </div>
-        <div class="form-group">
-          <label for="local">Local (Condomínio Cliente):</label>
-          <input type="text" id="local" name="local" required>
-        </div>
-        <div class="form-group">
-          <label for="descricao">Descrição da ocorrência:</label>
-          <textarea id="descricao" name="descricao" rows="10" required placeholder="Descreva aqui os eventos observados."></textarea>
-        </div>
-        <div class="form-group">
-          <label for="observacao">Observação:</label>
-          <textarea id="observacao" name="observacao"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="criticidade">Ocorreu algo grave?</label>
-          <select id="criticidade" name="criticidade" required>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="linkVideo">Link do Vídeo:</label>
-          <input type="url" id="linkVideo" name="linkVideo" placeholder="Cole aqui o link do Google Drive, YouTube etc" required>
-        </div>
-        <button type="submit">Concluir Relatório</button>
-      </form>
-    </section>
-  </div>
+ <div class="container" style="
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: center;
+">
+  <h2>Faça seu Login</h2>
+  <form id="loginFiscal" style="width: 100%;">
+    
 
-  <footer>
+
+    
+    <div class="form-group" style="margin-bottom: 15px; text-align: left;">
+      <label for="nomeFiscal">Nome ou E-mail:</label>
+      <input type="text" id="nomeFiscal" name="nomeFiscal" placeholder="Digite seu nome ou e-mail" required style="width: 100%; padding: 10px; box-sizing: border-box;">
+    </div>
+    <div class="form-group" style="margin-bottom: 15px; text-align: left;">
+      <label for="senhaFiscal">Senha:</label>
+      <input type="password" id="senhaFiscal" name="senhaFiscal" placeholder="Digite sua senha" required style="width: 100%; padding: 10px; box-sizing: border-box;">
+    </div>
+    
+        <form id="loginFiscal">
+        <label style="margin-bottom: 15px; text-align: left;" for="tipoUsuario">Tipo de Acesso:</label>
+        <select style="background-color: #263032c5; color: whitesmoke; font-weight: bold;" id="tipoUsuario" required>
+          <option value="">Selecione...</option>
+          <option value="fiscal">Fiscal</option>
+          <option value="analista">Analista de imagem</option>
+          <option value="gestao">Gestão</option>
+  </select>
+  
+  <br><br>
+
+    <button type="submit" style="
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    ">Entrar</button>
+  </form>
+</div>
+  <br><br>
+
+  <!--<footer>
     <p style="text-align: center">&copy; 2025 Sistema de Monitoramento. Todos os direitos reservados.</p>
-   <p style="text-align: center">&spades; v27052025 - NOITE</p>
-  </footer>
+    <p style="text-align: center">&spades; v28052025 - TARDE</p>
+  </footer>-->
 
-  <script src="script.js"></script>
+  <script src="Auth.js"></script>
 
 </body>
 </html>

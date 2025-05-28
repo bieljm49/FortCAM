@@ -109,8 +109,9 @@ function carregarRelatorios() {
           <p><strong>Analista:</strong> ${rel.analista}</p>
           <p><strong>Descrição:</strong> ${rel.descricao}</p>
           <p><strong>Observação:</strong> ${rel.observacao}</p>
-          <p><strong>OCorreu algo grave?:</strong> ${rel.criticidade}</p>
-          <p><a href="${rel.linkVideo}" target="_blank"><strong>Ver Vídeo</strong></a></p>
+          <p><strong>Ocorreu algo grave?:</strong> ${rel.criticidade}</p>
+          <p><a href="${rel.linkVideo}" target="_blank"><strong>Ver Vídeo</strong> <button onclick="navigator.clipboard.writeText('${rel.linkVideo}')">📋 Copiar link</button></a></p>
+          
           <p><strong>Status atual:</strong> ${rel.status}</p>
           <div class="form-group">
             <!-- <label for="justificativa-${rel.id}">Justificativa (opcional):
@@ -187,83 +188,20 @@ function atualizarStatus(id, status) {
 
 
 // ========== GERADOR DE PDF ==========
+
+
 function gerarPDF(relatorio) {
-  const {
-    id,
-    analista,
-    dataEvento,
-    local,
-    descricao,
-    observacao,
-    criticidade
-  } = relatorio;
+  const fiscal = localStorage.getItem("usuarioLogado") || "Fiscal não identificado";
+  const dados = { ...relatorio, fiscal };
 
-  const fiscal = localStorage.getItem("fiscalLogado") || "Fiscal não identificado";
-  const descricaoFormatada = descricao.replace(/\n/g, "<br>");
-  const observacaoFormatada = (observacao || "Sem nenhum adendo.").replace(/\n/g, "<br>");
-  const dataFormatada = new Date(dataEvento).toLocaleDateString("pt-BR");
+  const win = window.open("template-pdf.html", "_blank");
 
-  // Container A4
-  const pdfWrapper = document.createElement("div");
-  pdfWrapper.style.width = "210mm";
-  pdfWrapper.style.minHeight = "297mm";
-  pdfWrapper.style.position = "relative";
-  pdfWrapper.style.padding = "20mm";
-  pdfWrapper.style.boxSizing = "border-box";
-  pdfWrapper.style.fontFamily = "'Montserrat', sans-serif";
-  pdfWrapper.style.fontSize = "12pt";
-  pdfWrapper.style.color = "#000";
-
-  // Marca d'água
-  const marca = document.createElement("img");
-  marca.src = "logo.png";
-  marca.style.position = "absolute";
-  marca.style.opacity = "0.35";
-  marca.style.top = "1px";
-  marca.style.left = "50%";
-  marca.style.transform = "translate(-50%, -50%)";
-  marca.style.width = "300px";
-  marca.style.zIndex = "0";
-  pdfWrapper.appendChild(marca);
-
-  // Conteúdo
-  const conteudo = document.createElement("div");
-  
-  conteudo.style.position = "static ";
-  conteudo.style.top = "100px";
-
-  conteudo.style.zIndex = "1";
-  conteudo.innerHTML = `
-    <h1>Relatório de Ocorrência</h1>
-    <p><strong>Cliente:</strong> ${local}</p>
-    <p><strong>Data da Análise:</strong> ${dataFormatada}</p>
-
-    <h2 style="margin-top: 20px;">Diagnóstico</h2>
-    <p>Fomos contratados para realizar uma análise técnica detalhada, aplicando soluções avançadas em segurança e monitoramento.</p>
-
-    <h2 style="margin-top: 20px;">Descrição da Ocorrência</h2>
-    <p>${descricaoFormatada}</p>
-
-    ${criticidade === "Sim" ? `<p style="color: red; font-weight: bold;">⚠ Ocorrência considerada crítica</p>` : ""}
-
-    <h2 style="margin-top: 20px;">Observações</h2>
-    <p>${observacaoFormatada}</p>
-
-    <hr style="margin: 30px 0;">
-
-    <div style="display: flex; justify-content: space-between;">
-      <div><strong>Fiscal:</strong> ${fiscal}</div>
-      <div><strong>Analista:</strong> ${analista}</div>
-    </div>
-    
-  `;
-  pdfWrapper.appendChild(conteudo);
-
-  // Gerar o PDF
-  html2pdf().set({
-    margin: 0,
-    filename: `Relatorio_${id}.pdf`,
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-  }).from(pdfWrapper).save();
+  // Garante que a janela carregue e receba os dados
+  const timer = setInterval(() => {
+    if (win && win.document && win.document.readyState === "complete") {
+      win.postMessage(dados, "*");
+      clearInterval(timer);
+    }
+  }, 300);
 }
+
