@@ -1,22 +1,27 @@
-<!-- index.html adaptado para controle de relatórios de vídeo -->
+<!-- index.html adaptado para controle de relatórios de vídeo - Apenas para analistas -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controle de Relatórios | CFTV</title>
+  <title>Controle de Relatórios | FORTCAM</title>
   <link rel="icon" href="logo.png" type="image/x-icon">
   <link rel="stylesheet" href="Style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
+    <nav style="position: absolute; top: 10px; right: 10px;">
+    <ul style="list-style: none; margin: 0; padding: 0;">
+    <li><a href="login.html">Login Fiscal</a></li>
+    </ul>
+    </nav>
+    
     <img src="logo.png" alt="Logo"/>
-    <h1>Controle de Relatórios | CFTV</h1>
+    <h1>Controle de Relatórios | FORTCAM</h1>
     <nav>
       <ul>
-        <li><a href="#" class="nav-link active" data-section="novoRelatorio">Novo Relatório</a></li>
-        <li><a href="#" class="nav-link" data-section="painelFiscal">Painel Fiscal</a></li>
+        <li><a href="#" class="nav-link active" data-section="novoRelatorio">Preenchimento de Relatório</a></li>
       </ul>
     </nav>
   </header>
@@ -54,30 +59,20 @@
           </select>
         </div>
         <div class="form-group">
-        <label for="imagem">Deseja incluir captura de tela? (opcional):</label>
-        <input type="file" id="imagem" name="imagem" accept="image/*">
-        </div>
-        <div class="form-group">
           <label for="linkVideo">Link do Vídeo:</label>
           <input type="url" id="linkVideo" name="linkVideo" placeholder="Cole aqui o link do Google Drive, YouTube etc" required>
         </div>
         <button type="submit">Concluir Relatório</button>
       </form>
     </section>
-
-    <section id="painelFiscal" class="section">
-      <h2>Painel do Fiscal</h2>
-      <div id="listaRelatorios">
-        <p>Carregando relatórios...</p>
-      </div>
-    </section>
   </div>
 
   <footer>
     <p style="text-align: center">&copy; 2025 Sistema de Monitoramento. Todos os direitos reservados.</p>
-    <p style="text-align: center">&spades; v26052025</p>
+   <p style="text-align: center">&spades; v27052025 - NOITE</p>
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
