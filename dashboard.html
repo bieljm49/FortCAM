@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard de Relatórios</title>
+  <title>Dashboard | FORTCAM</title>
+  <link rel="icon" href="icon.png" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="Style.css">
 
@@ -54,7 +55,9 @@
     <header>
     <nav style="position: absolute; top: 10px; right: 10px;">
     <ul style="list-style: none; margin: 0; padding: 0;">
+    <li><a id="logoutLink" style="cursor: pointer;"></a></li>
     <li><a onclick="logout()">Logout</a></li>
+    
     </ul>
     </nav>
 
@@ -65,7 +68,8 @@
       <ul>
         <li><a href="painel-analista.html" data-section="novoRelatorio">Preenchimento de Relatório</a></li>
         <li><a href="painel-fiscal.html" data-section="novoRelatorio">Painel Fiscal</a></li>
-        <li><a href="dashboard.html" class="nav-link active" data-section="novoRelatorio">Dashboard</a></li>
+        <li><a href="#" class="nav-link active" data-section="novoRelatorio">Dashboard</a></li>
+        
       </ul>
     </nav>
       
