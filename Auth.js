@@ -5,12 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     { usuario: 'fiscal', senha: 'fisc@l1234', tipo: 'fiscal' },
     { usuario: 'analista1', senha: 'an@lista', tipo: 'analista' },
     { usuario: 'admin', senha: 'admin123', tipo: 'gestao' },
-
-    { usuario: 'teste', senha: 'teste', tipo: 'fiscal' },
-    { usuario: 'teste', senha: 'teste', tipo: 'analista' },
-    { usuario: 'teste', senha: 'teste', tipo: 'gestao' },
     
-    { usuario: 'gabriel.medeiros@fortcam.com.br', senha: '12345', tipo: 'analista' }
+    { usuario: 'gabriel.medeiros', senha: 'fortcam', tipo: 'gestao' },
+    { usuario: 'miguel.fernando', senha: 'fortcam', tipo: 'gestao' },
+    { usuario: 'daniel.henrique', senha: 'fortcam', tipo: 'gestao' }
   ];
 
   if (loginForm) {
@@ -44,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const tipo = localStorage.getItem("tipoUsuario");
     const nome = localStorage.getItem("usuarioLogado");
 
-    if (tipo !== "analista") {
+    if (tipo !== "analista" && tipo !== "gestao") {
       alert("Acesso não autorizado!");
-      location.href = "login.html";
+      location.href = "index.html";
     } else {
       const campo = document.getElementById("analista");
       campo.value = nome;
@@ -60,3 +58,11 @@ function logout() {
   localStorage.clear();
   window.location.href = "index.html";
 }
+
+ const nome = localStorage.getItem("usuarioLogado") || "Usuário";
+const logoutLink = document.getElementById("logoutLink");
+if (logoutLink) {
+  logoutLink.textContent = `Seja bem-vindo ${nome}`;
+}
+
+
