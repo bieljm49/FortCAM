@@ -1,4 +1,4 @@
-const googleScriptURL = "https://script.google.com/macros/s/AKfycbxx8qFuuvkYdqEm6joO_0-boWzIW_BGXP6vjKyDiFxvBV_nIZToG1cwmeHXB17sjqv6/exec";
+const googleScriptURL = "https://script.google.com/macros/s/AKfycbxEVjqyhBtcemHqfyzhCmJQGpfKwjP9ipzntu6h0QpNRtPHvUzwwtKoPeuXyUFdCkRF/exec";
 
 
 
@@ -53,11 +53,20 @@ if (document.getElementById("relatoriosContainer")) {
   carregarRelatorios();
 }
 
-document.getElementById("filtroStatus")?.addEventListener("change", carregarRelatorios);
-document.getElementById("filtroAnalista")?.addEventListener("change", carregarRelatorios);
+document.getElementById("filtroStatus")?.addEventListener("change", () => {
+  mostrarPopupLoading(); // mostra o loading
+  carregarRelatorios();
+});
+
+document.getElementById("filtroAnalista")?.addEventListener("change", () => {
+  mostrarPopupLoading();
+  carregarRelatorios();
+});
 
 // ================== CARREGAR RELATÓRIOS ==================
 function carregarRelatorios() {
+  mostrarPopupLoading();
+  
   fetch(googleScriptURL + "?acao=listar")
     .then(response => response.json())
     .then(data => {
@@ -67,7 +76,9 @@ function carregarRelatorios() {
       if (!Array.isArray(data) || data.length === 0) {
         container.innerHTML = "<p>Nenhum relatório encontrado.</p>";
         return;
+        
       }
+      esconderPopupLoading();
 
       const statusSelecionado = document.getElementById("filtroStatus")?.value || "";
       const analistaSelecionado = document.getElementById("filtroAnalista")?.value || "";
@@ -76,6 +87,7 @@ function carregarRelatorios() {
         const statusOk = !statusSelecionado || rel.status === statusSelecionado;
         const analistaOk = !analistaSelecionado || rel.analista === analistaSelecionado;
         return statusOk && analistaOk;
+        
       });
 
       const selectAnalista = document.getElementById("filtroAnalista");
@@ -112,6 +124,9 @@ function carregarRelatorios() {
         detalhes.className = "card-detalhes";
         detalhes.style.display = "none"; // oculto por padrão
         detalhes.innerHTML = `
+          <p><strong>ID:</strong> ${rel.id}</p>
+          <p><strong>Analista Responsavel pelo Relatorio:</strong> ${rel.analista}</p>
+          <p><strong>Status:</strong> ${rel.status}</p>
           <p><strong>Data:</strong> ${rel.dataEvento}</p>
           <p><strong>Local:</strong> ${rel.local}</p>
           <p><strong>Descrição:<br></strong> ${rel.descricao}</p>
@@ -243,4 +258,16 @@ function gerarPDF(relatorio) {
       clearInterval(timer);
     }
   }, 300);
+}
+
+// Po-up carregamento
+
+function mostrarPopupLoading() {
+  const popup = document.getElementById("popupLoading");
+  if (popup) popup.style.display = "flex";
+}
+
+function esconderPopupLoading() {
+  const popup = document.getElementById("popupLoading");
+  if (popup) popup.style.display = "none";
 }

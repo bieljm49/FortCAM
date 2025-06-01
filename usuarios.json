@@ -1,0 +1,9 @@
+[
+  { "usuario": "fiscal", "senha": "fisc@l1234", "tipo": "fiscal" },
+  { "usuario": "analista1", "senha": "an@lista", "tipo": "analista" },
+  { "usuario": "admin", "senha": "admin123", "tipo": "gestao" },
+  { "usuario": "gabriel.medeiros", "senha": "fortcam", "tipo": "gestao" },
+  { "usuario": "miguel.fernando", "senha": "fortcam123", "tipo": "gestao" },
+  { "usuario": "daniel.henrique", "senha": "fortcam", "tipo": "gestao" },
+  { "usuario": "caio.braga", "senha": "fortcam", "tipo": "gestao" }
+]
