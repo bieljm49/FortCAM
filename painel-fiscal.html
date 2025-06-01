@@ -7,30 +7,26 @@
   <link rel="icon" href="icon.png" type="image/x-icon">
   <link rel="stylesheet" href="Style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-  const tipo = localStorage.getItem("tipoUsuario");
-  if (tipo !== "fiscal" && tipo !== "gestao") {
-  alert("Acesso não autorizado!");
-  location.href = "index.html";
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
 
-
+  <script>
+    const tipo = localStorage.getItem("tipoUsuario");
+    if (tipo !== "fiscal" && tipo !== "gestao") {
+      alert("Acesso não autorizado!");
+      location.href = "index.html";
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
   <header>
     <nav style="position: absolute; top: 10px; right: 10px;">
-    <ul style="list-style: none; margin: 0; padding: 0;">
-   
-    <li><a id="logoutLink" style="cursor: pointer;"></a></li>
-    <li><a onclick="logout()">Logout</a></li>
-    </ul>
+      <ul style="list-style: none; margin: 0; padding: 0;">
+        <li><a id="logoutLink" style="cursor: pointer;"></a></li>
+        <li><a onclick="logout()">Logout</a></li>
+      </ul>
     </nav>
-        
-
     <img src="logo.png" alt="Logo"/>
     <h1>Acompanhamento de Relatórios | FORTCAM</h1>
     <nav>
@@ -41,56 +37,41 @@
       </ul>
     </nav>
   </header>
+
   <div class="container">
-    <h2>Relatorios para análise</h2>
-    
-     <div class="filtros" style="margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
-  <label for="filtroStatus" style="font-weight: bold;">Filtrar por Status:</label>
-  <select id="filtroStatus" style="
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border 0.3s;
-  " onfocus="this.style.border='1px solid #4CAF50'" onblur="this.style.border='1px solid #ccc'">
-    
-    <option value="Pendente">Pendente</option>
-    <option value="Aprovado">Aprovado</option>
-    <option value="Reprovado">Reprovado</option>
-  </select>
+    <h2>Relatórios para análise</h2>
+    <div class="filtros" style="margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <label for="filtroStatus" style="font-weight: bold;">Filtrar por Status:</label>
+      <select id="filtroStatus" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; background-color: #f9f9f9; font-size: 14px; cursor: pointer;">
+        <option value="Pendente">Pendente</option>
+        <option value="Aprovado">Aprovado</option>
+        <option value="Reprovado">Reprovado</option>
+      </select>
 
-  <label for="filtroAnalista" style="margin-left: 15px; font-weight: bold;">Filtrar por Analista:</label>
-  <select id="filtroAnalista" style="
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border 0.3s;
-  " onfocus="this.style.border='1px solid #4CAF50'" onblur="this.style.border='1px solid #ccc'">
-    <option value="">Todos</option>
-    <!-- preenchido via JS -->
-  </select>
-</div>
+      <label for="filtroAnalista" style="margin-left: 15px; font-weight: bold;">Filtrar por Analista:</label>
+      <select id="filtroAnalista" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; background-color: #f9f9f9; font-size: 14px; cursor: pointer;">
+        <option value="">Todos</option>
+      </select>
+    </div>
 
-    <div id="relatoriosContainer">
-  <div class="spinner"></div>
-  <p style="font-weight: bold;">Carregando relatórios...</p>
-</div>  
+    <div id="relatoriosContainer"></div>
+  </div>
+
+  <!-- POPUP DE CARREGAMENTO -->
+  <div id="popupLoading">
+    <div class="popup-box-loading">
+      Carregando relatórios, por favor aguarde...
+      <div class="spinner"></div>
+    </div>
   </div>
 
   <footer>
     <p style="text-align: center">&copy; 2025 Sistema de Monitoramento. Todos os direitos reservados.</p>
     <p style="text-align: center">&spades; v29052025 - TARDE</p>
   </footer>
-  
-  
+
   <iframe id="printFrame" style="display: none;"></iframe>
 
-  
   <script src="script.js"></script>
   <script src="Auth.js"></script>
 </body>
